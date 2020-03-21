@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dp110"
+    android:layout_height="@dimen/dp110">
+
+    <ImageView
+        android:id="@+id/card_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/dp5"
+        android:scaleType="fitCenter"
+        android:paddingBottom="@dimen/dp10"
+        android:src="@mipmap/img_zing"/>
+
+    <TextView
+        android:id="@+id/text_chiet_khau"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:textColor="@android:color/holo_red_dark"
+        android:text="Chiết khấu 20%"
+        android:layout_marginBottom="@dimen/dp5"
+        android:textSize="@dimen/sp12"/>
+
+    <View
+        android:id="@+id/border"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/card_border"
+        android:visibility="gone"></View>
+
+</FrameLayout>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.vuducminh.viza">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <application
+        android:name="com.vuducminh.viza.MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="com.vuducminh.viza.activities.SplashActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.vuducminh.viza.activities.MainActivity"
+            android:windowSoftInputMode="adjustPan"></activity>
+
+        <activity
+            android:name="com.vuducminh.viza.activities.NewsActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="com.vuducminh.viza.activities.LoginActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="com.vuducminh.viza.activities.RegisterActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="com.vuducminh.viza.activities.ForgotPassActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="com.vuducminh.viza.activities.DetailActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="com.vuducminh.viza.activities.DepositActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="com.vuducminh.viza.activities.DepositCardActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="com.vuducminh.viza.activities.DepositEbankingActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="com.vuducminh.viza.activities.WithdrawActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="com.vuducminh.viza.activities.WithdrawATMActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="com.vuducminh.viza.activities.WithdrawCMTActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="com.vuducminh.viza.activities.WithdrawBankActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="com.vuducminh.viza.activities.PhoneRechargeActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="com.vuducminh.viza.activities.BuyGameCardActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="com.vuducminh.viza.activities.BuyPhoneCardActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="com.vuducminh.viza.activities.TraGopActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="com.vuducminh.viza.activities.IntroActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="com.vuducminh.viza.activities.ContactActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="com.vuducminh.viza.activities.ListCardActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="com.vuducminh.viza.activities.TransDetailActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="com.vuducminh.viza.activities.PaidCardActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="com.vuducminh.viza.activities.CardInfoActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="com.vuducminh.viza.activities.PaySaveActivity"
+            android:screenOrientation="portrait"></activity>
+    </application>
+
+</manifest>

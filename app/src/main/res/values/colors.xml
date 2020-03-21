@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#2ec111</color>
+    <color name="colorPrimaryTrans">#802ec111</color>
+    <color name="colorPrimaryDark">#2ec111</color>
+    <color name="colorAccent">#2ec111</color>
+    <color name="colorDivider">#cccccc</color>
+    <color name="colorButton">#cceecc</color>
+</resources>

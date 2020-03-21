@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@mipmap/ic_nap_phone_card_pressed" android:state_focused="true" android:state_pressed="true"></item>
+    <item android:drawable="@mipmap/ic_nap_phone_card_pressed" android:state_focused="false" android:state_pressed="true"></item>
+    <item android:drawable="@mipmap/ic_nap_phone_card"></item>
+</selector>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp70">
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="@dimen/dp30"
+            android:layout_height="@dimen/dp30"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp20"
+            android:src="@mipmap/ic_back_green" />
+
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/rut_tien"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/sp24" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp5"
+        android:background="@drawable/shadow"></View>
+
+    <RelativeLayout
+        android:id="@+id/button_withdraw_atm"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp60"
+        android:layout_marginLeft="@dimen/dp20"
+        android:layout_marginRight="@dimen/dp20"
+        android:layout_marginTop="@dimen/dp30"
+        android:background="@drawable/button_style_3">
+
+        <ImageView
+            android:id="@+id/send_1"
+            android:layout_width="@dimen/dp25"
+            android:layout_height="@dimen/dp25"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp20"
+            android:src="@mipmap/ic_send" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp40"
+            android:layout_toRightOf="@+id/send_1"
+            android:text="RÚT VỀ THẺ ATM"
+            android:textSize="@dimen/sp18" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/button_withdraw_cmt"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp60"
+        android:layout_marginLeft="@dimen/dp20"
+        android:layout_marginRight="@dimen/dp20"
+        android:layout_marginTop="@dimen/dp20"
+        android:background="@drawable/button_style_3">
+
+        <ImageView
+            android:id="@+id/send_2"
+            android:layout_width="@dimen/dp25"
+            android:layout_height="@dimen/dp25"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp20"
+            android:src="@mipmap/ic_send" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/dp40"
+            android:layout_toRightOf="@+id/send_2"
+            android:text="RÚT VỀ CHỨNG MINH THƯ"
+            android:textSize="@dimen/sp18" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/button_withdraw_bank"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp60"
+        android:layout_marginLeft="@dimen/dp20"
+        android:layout_marginRight="@dimen/dp20"
+        android:layout_marginTop="@dimen/dp20"
+        android:background="@drawable/button_style_3">
+
+        <ImageView
+            android:id="@+id/send_3"
+            android:layout_width="@dimen/dp25"
+            android:layout_height="@dimen/dp25"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp20"
+            android:src="@mipmap/ic_send" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/dp40"
+            android:layout_toRightOf="@+id/send_3"
+            android:text="RÚT VỀ TÀI KHOẢN NGÂN HÀNG"
+            android:textSize="@dimen/sp18" />
+
+    </RelativeLayout>
+
+</LinearLayout>

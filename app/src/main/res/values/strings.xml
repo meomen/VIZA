@@ -1,0 +1,68 @@
+<resources>
+    <string name="app_name">Thecaosieure</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+    <string name="home_page">Trang chủ</string>
+    <string name="transfer">Chuyển tiền</string>
+    <string name="payment">Thanh toán</string>
+    <string name="wallet">Ví điện tử</string>
+    <string name="login_account">Đăng nhập tài khoản</string>
+    <string name="chuyen_tien">Chuyển tiền</string>
+    <string name="nap_dien_thoai">Nạp tiền điện thoại</string>
+    <string name="mua_the_dien_thoai">Mua thẻ điện thoại</string>
+    <string name="doi_the_cao">Nạp từ thẻ viễn thông</string>
+    <string name="mua_the_game">Mua thẻ game</string>
+    <string name="nap_tien">Nạp tiền</string>
+    <string name="nap_tien_card">Thẻ cào điện thoại, Thẻ gate</string>
+    <string name="rut_tien">Rút tiền</string>
+    <string name="rut_tien_atm">Rút về thẻ ATM</string>
+    <string name="rut_tien_cmt">Rút về chứng minh thư</string>
+    <string name="rut_tien_bank">Rút về tài khoản ngân hàng</string>
+    <string name="thanh_toan_hoa_don">Thanh toán hóa đơn</string>
+    <string name="diem_thanh_toan">Điểm thanh toán trả góp</string>
+    <string name="tra_gop">Thanh toán trả góp</string>
+    <string name="visa">Dịch vụ thẻ visa</string>
+    <string name="lien_he">Liên hệ</string>
+    <string name="ban_quyen">Bản quyền thuộc Thecaosieure.com | Phiên bản 1.0</string>
+    <string name="dang_nhap">Đăng nhập</string>
+    <string name="dang_ki">Đăng kí</string>
+    <string name="dang_xuat">Đăng xuất</string>
+    <string name="gioi_thieu">Giới thiệu</string>
+    <string name="dich_vu">Dịch vụ</string>
+    <string name="tin_tuc">Tin tức</string>
+    <string name="personal_information">Thông tin cá nhân</string>
+    <string name="ho_so">Hồ sơ</string>
+    <string name="mat_khau">Mật khẩu</string>
+    <string name="cau_hinh_odp">Cấu hình ODP</string>
+    <string name="cap_nhat">Cập nhật</string>
+    <string name="prepay">Trả trước</string>
+    <string name="postpaid">Trả sau</string>
+    <string name="cu_phap_1"><![CDATA[<b>TCSR DK TK</b> gửi <b>8298</b>]]></string>
+    <string name="cu_phap_2"><![CDATA[<b>TCSR MK</b> gửi <b>8298</b>]]></string>
+    <string name="dang_ky_1">Hiện tại hệ thống chỉ hỗ trợ quý khách đăng ký tài khoản qua SMS theo cú pháp sau:</string>
+    <string name="dang_ky_2"><![CDATA["<b>Trong đó:</b>
+        <br></br>
+        <br>TSCR là tên viết tắt của Thecaosieure.</br>
+        <br>DK là viết tắt của từ đăng ký.</br>
+        <br>TK tức là tên tài khoản quý khách hàng muốn đăng ký và phải từ 6 kí tự trở lên.</br>
+        <br>Mật khẩu của quý khách sẽ được hệ thống tự động trả về bao gồm 6 số.</br>
+        <br></br>
+        <br><b>Lưu ý:</b></br>
+        <br></br>
+        <br>Một số điện thoại chỉ được đăng ký duy nhất 1 tài khoản.</br>
+        <br>Số điện thoại khi đăng ký nếu không trùng với bất kỳ số điện thoại của các tài khoản khác.</br>
+        <br>Phí đăng ký là <b>2000 VNĐ/sms</b>"</br>]]></string>
+    <string name="quen_mk_1">Bạn vui lòng sử dụng số di động đã đăng ký soạn tin nhắn theo cú pháp:</string>
+    <string name="quen_mk_2"><![CDATA["<b>Trong đó:</b>
+        <br></br>
+        <br>TSCR MK là cú pháp mặc định để cấp lại mật khẩu.</br>
+        <br>Trong vòng 5-10s hệ thống sẽ trả về SMS có chứa mật khẩu mới.</br>
+        <br>Quý khách đăng nhập vào hệ thống để đổi lại mật khẩu.</br>
+        <br></br>
+        <br><b>Lưu ý:</b></br>
+        <br></br>
+        <br>Chức năng này chỉ sử dụng được với số điện thoại đã đăng ký.</br>
+        <br>Phí lấy lại mật khẩu là <b>4000 VNĐ/sms</b>"</br>]]>
+    </string>
+    <string name="loi_khuyen">Chúng tôi khuyên bạn không nên đặt mật khẩu quá đơn giản như: ngày tháng năm sinh, số điện thoại,...</string>
+</resources>
