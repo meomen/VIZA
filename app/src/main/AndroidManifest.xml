@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name="com.vuducminh.viza.activities.SplashActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="fullSensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,96 +28,96 @@
 
         <activity
             android:name="com.vuducminh.viza.activities.NewsActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="fullSensor"></activity>
 
         <activity
             android:name="com.vuducminh.viza.activities.LoginActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="fullSensor"></activity>
 
         <activity
             android:name="com.vuducminh.viza.activities.RegisterActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="fullSensor"></activity>
 
         <activity
             android:name="com.vuducminh.viza.activities.ForgotPassActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="fullSensor"></activity>
 
         <activity
             android:name="com.vuducminh.viza.activities.DetailActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="fullSensor"></activity>
 
         <activity
             android:name="com.vuducminh.viza.activities.DepositActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="fullSensor"></activity>
 
         <activity
             android:name="com.vuducminh.viza.activities.DepositCardActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="fullSensor"></activity>
 
         <activity
             android:name="com.vuducminh.viza.activities.DepositEbankingActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="fullSensor"></activity>
 
         <activity
             android:name="com.vuducminh.viza.activities.WithdrawActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="fullSensor"></activity>
 
         <activity
             android:name="com.vuducminh.viza.activities.WithdrawATMActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="fullSensor"></activity>
 
         <activity
             android:name="com.vuducminh.viza.activities.WithdrawCMTActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="fullSensor"></activity>
 
         <activity
             android:name="com.vuducminh.viza.activities.WithdrawBankActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="fullSensor"></activity>
 
         <activity
             android:name="com.vuducminh.viza.activities.PhoneRechargeActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="fullSensor"></activity>
 
         <activity
             android:name="com.vuducminh.viza.activities.BuyGameCardActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="fullSensor"></activity>
 
         <activity
             android:name="com.vuducminh.viza.activities.BuyPhoneCardActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="fullSensor"></activity>
 
         <activity
             android:name="com.vuducminh.viza.activities.TraGopActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="fullSensor"></activity>
 
         <activity
             android:name="com.vuducminh.viza.activities.IntroActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="fullSensor"></activity>
 
         <activity
             android:name="com.vuducminh.viza.activities.ContactActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="fullSensor"></activity>
 
         <activity
             android:name="com.vuducminh.viza.activities.ListCardActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="fullSensor"></activity>
 
         <activity
             android:name="com.vuducminh.viza.activities.TransDetailActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="fullSensor"></activity>
 
         <activity
             android:name="com.vuducminh.viza.activities.PaidCardActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="fullSensor"></activity>
 
         <activity
             android:name="com.vuducminh.viza.activities.CardInfoActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="fullSensor"></activity>
 
         <activity
             android:name="com.vuducminh.viza.activities.PaySaveActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="fullSensor"></activity>
     </application>
 
 </manifest>

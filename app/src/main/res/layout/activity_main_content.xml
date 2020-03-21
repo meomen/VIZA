@@ -51,13 +51,13 @@
         android:background="@drawable/shadow"
         android:visibility="gone"></View>
     
-    <com.tcsrmobile.thecaosieure.utils.NonSwipeableViewPager
+    <com.vuducminh.viza.utils.NonSwipeableViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"></com.tcsrmobile.thecaosieure.utils.NonSwipeableViewPager>
+        android:layout_weight="1"></com.vuducminh.viza.utils.NonSwipeableViewPager>
 
-    <android.support.design.widget.TabLayout
+    <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp60"
