@@ -10,6 +10,7 @@ import android.view.TouchDelegate;
 import android.view.View;
 
 
+import com.google.firebase.storage.StorageReference;
 import com.vuducminh.viza.activities.MainActivity;
 
 import java.math.BigInteger;
@@ -23,6 +24,18 @@ public class Constant {
     public static final String IMAGE_CARD_URL = "https://thecaosieure.com/Uploads/banks/";
     public static final String EBANKING_URL = "https://m.thecaosieure.com/DepositBankNetRequest?tokenapp=";
 
+    public static String CUSTOMER = "customer";
+    public static String USER = "user";
+    public static String HISTORY = "history";
+    public static String WALLET = "wallet";
+    public static String MONEY = "money";
+    public static String ORDER = "order";
+    public static String ORDER_DEPOSIT = "order_deposit";
+    public static String ORDER_CARD_PHONE = "order_card_phone";
+    public static String ORDER_CARD_GAME = "order_card_game";
+    public static String CONNECT_BANK = "connect_bank";
+
+
     public static String IS_LOGIN = "is_login";
     public static String LOGIN_SUCCESS = "login_success";
     public static String USER_INFO = "user_info";
@@ -31,6 +44,17 @@ public class Constant {
     public static String GOTO_PAYMENT = "goto_payment";
     public static final String UPDATE_INFO = "update_info";
     public static final String UPDATE_PROFILE = "update_profile";
+
+    public static int TYPE_TRANS = 1;
+    public static int TYPE_BUY_CARD_PHONE = 2;
+    public static int TYPE_BUY_CARD_GAME = 3;
+    public static int TYPE_DEPOSTI = 4;
+    public static int TYPE_WITHDAW = 5;
+
+    public static boolean isValid(String email) {
+        String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+        return email.matches(regex);
+    }
 
     public static String getDeviceId(Context context) {
         String device_uuid = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
@@ -93,4 +117,5 @@ public class Constant {
         mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
         System.exit(0);
     }
+
 }

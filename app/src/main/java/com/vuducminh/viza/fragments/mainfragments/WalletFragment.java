@@ -19,9 +19,7 @@ import com.vuducminh.viza.fragments.personalfragments.PasswordFragment;
 
 import java.util.ArrayList;
 
-/**
- * Created by Linh Lee on 4/9/2017.
- */
+
 public class WalletFragment extends BaseFragment {
     private TabLayout tabs;
     private ViewPager pager;
@@ -53,11 +51,11 @@ public class WalletFragment extends BaseFragment {
         listFragment = new ArrayList<>();
         listFragment.add(FileFragment.newInstance());
         listFragment.add(PasswordFragment.newInstance());
-        listFragment.add(OdpFragment.newInstance());
+//        listFragment.add(OdpFragment.newInstance());
 
         adapter = new TabsPagerAdapter(getChildFragmentManager(), listFragment);
         pager.setAdapter(adapter);
-        pager.setOffscreenPageLimit(3);
+        pager.setOffscreenPageLimit(2);
 
         tabs.setupWithViewPager(pager);
 
@@ -65,8 +63,8 @@ public class WalletFragment extends BaseFragment {
         tab1.setCustomView(createTabView(getResources().getString(R.string.ho_so)));
         TabLayout.Tab tab2 = tabs.getTabAt(1);
         tab2.setCustomView(createTabView(getResources().getString(R.string.mat_khau)));
-        TabLayout.Tab tab3 = tabs.getTabAt(2);
-        tab3.setCustomView(createTabView(getResources().getString(R.string.cau_hinh_odp)));
+//        TabLayout.Tab tab3 = tabs.getTabAt(2);
+//        tab3.setCustomView(createTabView(getResources().getString(R.string.cau_hinh_odp)));
     }
 
     private View createTabView(String title) {

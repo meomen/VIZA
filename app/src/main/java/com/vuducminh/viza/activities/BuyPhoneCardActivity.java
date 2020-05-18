@@ -13,25 +13,42 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 import com.vuducminh.viza.MyApplication;
 import com.vuducminh.viza.R;
 import com.vuducminh.viza.adapters.ListCardAdapter;
+import com.vuducminh.viza.dialogs.ErrorDialog;
 import com.vuducminh.viza.dialogs.LoadingDialog;
+import com.vuducminh.viza.dialogs.SuccessDialog;
 import com.vuducminh.viza.models.CardObject;
 import com.vuducminh.viza.models.CardRequest;
+import com.vuducminh.viza.models.History;
 import com.vuducminh.viza.models.MoneyRequest;
 import com.vuducminh.viza.models.OtherRequest;
 import com.vuducminh.viza.models.User;
+import com.vuducminh.viza.models.order.OrderCard;
+import com.vuducminh.viza.models.order.OrderDeposit;
 import com.vuducminh.viza.retrofit.IRetrofitAPI;
 import com.vuducminh.viza.utils.Constant;
 import com.vuducminh.viza.utils.GridSpacingItemDecoration;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import retrofit2.Call;
@@ -42,6 +59,7 @@ import retrofit2.Retrofit;
 
 
 public class BuyPhoneCardActivity extends BaseActivity implements View.OnClickListener {
+
     private Gson mGson;
     private Retrofit mRetrofit;
     private IRetrofitAPI mRetrofitAPI;
@@ -56,9 +74,9 @@ public class BuyPhoneCardActivity extends BaseActivity implements View.OnClickLi
     private ArrayAdapter<String> spinnerAdapter;
     private ArrayList<String> listPrice;
     private ArrayList<String> listInfo;
-    private TextView textAmount;
-    private ImageView minusButton;
-    private ImageView plusButton;
+//    private TextView textAmount;
+//    private ImageView minusButton;
+//    private ImageView plusButton;
     private TextView textThanhToan;
     private EditText editMk2;
     private Button continueButton;
@@ -70,6 +88,9 @@ public class BuyPhoneCardActivity extends BaseActivity implements View.OnClickLi
     private Call<CardRequest> getCardInfoAPI;
     private Call<OtherRequest> buyCardAPI;
     private Call<MoneyRequest> getRealMoneyAPI;
+
+    private String timecreated;
+    private int paymoney;
 
     @Override
     protected int getLayoutResource() {
@@ -89,9 +110,9 @@ public class BuyPhoneCardActivity extends BaseActivity implements View.OnClickLi
         backButton = (ImageView) findViewById(R.id.back_btn);
         listPhoneCardView = (RecyclerView) findViewById(R.id.list_phone_card);
         spinner = (Spinner) findViewById(R.id.spinner);
-        textAmount = (TextView) findViewById(R.id.text_amount);
-        minusButton = (ImageView) findViewById(R.id.button_minus);
-        plusButton = (ImageView) findViewById(R.id.button_plus);
+//        textAmount = (TextView) findViewById(R.id.text_amount);
+//        minusButton = (ImageView) findViewById(R.id.button_minus);
+//        plusButton = (ImageView) findViewById(R.id.button_plus);
         textThanhToan = (TextView) findViewById(R.id.text_thanh_toan);
         editMk2 = (EditText) findViewById(R.id.edit_mk2);
         continueButton = (Button) findViewById(R.id.continue_button);
@@ -144,16 +165,16 @@ public class BuyPhoneCardActivity extends BaseActivity implements View.OnClickLi
             }
         });
 
-        textAmount.setText(amount + "");
+//        textAmount.setText(amount + "");
 
         Constant.increaseHitArea(backButton);
-        Constant.increaseHitArea(minusButton);
-        Constant.increaseHitArea(plusButton);
+//        Constant.increaseHitArea(minusButton);
+//        Constant.increaseHitArea(plusButton);
         Constant.increaseHitArea(viewCard);
 
         backButton.setOnClickListener(this);
-        minusButton.setOnClickListener(this);
-        plusButton.setOnClickListener(this);
+//        minusButton.setOnClickListener(this);
+//        plusButton.setOnClickListener(this);
         continueButton.setOnClickListener(this);
         viewCard.setOnClickListener(this);
     }
@@ -199,47 +220,10 @@ public class BuyPhoneCardActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void buyCard() {
-        HashMap<String, Object> body = new HashMap<>();
-        body.put("product", listPhoneCard.get(curPos).getBankName());
-        body.put("menhgia", listInfo.get(spinner.getSelectedItemPosition()));
-        body.put("soluong", amount);
-        body.put("mk2", editMk2.getText().toString());
-
         loadingDialog.show();
-        buyCardAPI = mRetrofitAPI.buyCard(user.getToken(), body);
-        buyCardAPI.enqueue(new Callback<OtherRequest>() {
-            @Override
-            public void onResponse(Call<OtherRequest> call, Response<OtherRequest> response) {
-                int errorCode = response.body().getErrorCode();
-                String msg = response.body().getMsg();
-                loadingDialog.dismiss();
-
-                if (errorCode == 1) {
-                    Intent cardInfo = new Intent(BuyPhoneCardActivity.this, CardInfoActivity.class);
-                    cardInfo.putExtra("card_info", msg);
-                    startActivity(cardInfo);
-
-                    editMk2.setText("");
-
-                    Intent i = new Intent(Constant.UPDATE_INFO);
-                    sendBroadcast(i);
-                } else {
-                    Toast.makeText(BuyPhoneCardActivity.this, msg, Toast.LENGTH_SHORT).show();
-
-                    if (errorCode == -2) {
-                        sharedPreferences.edit().putBoolean(Constant.IS_LOGIN, false).apply();
-                        sharedPreferences.edit().putString(Constant.USER_INFO, "").apply();
-                        Constant.restartApp(BuyPhoneCardActivity.this);
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<OtherRequest> call, Throwable t) {
-                Toast.makeText(BuyPhoneCardActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                loadingDialog.dismiss();
-            }
-        });
+        upToHistory();
+        updateMoney();
+        upToOrder();
     }
 
     private void getThanhToan(int spinnerPos) {
@@ -258,8 +242,8 @@ public class BuyPhoneCardActivity extends BaseActivity implements View.OnClickLi
         getRealMoneyAPI.enqueue(new Callback<MoneyRequest>() {
             @Override
             public void onResponse(Call<MoneyRequest> call, Response<MoneyRequest> response) {
-                int data = response.body().getData();
-                textThanhToan.setText(data + " VNĐ");
+                paymoney = response.body().getData();
+                textThanhToan.setText(paymoney + " VNĐ");
 
                 loadingDialog.dismiss();
             }
@@ -272,26 +256,112 @@ public class BuyPhoneCardActivity extends BaseActivity implements View.OnClickLi
         });
     }
 
+    public void updateMoney() {
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference(Constant.CUSTOMER)
+                .child(user.getMobile()).child(Constant.WALLET);
+        userRef.child(Constant.MONEY)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Integer money = 0;
+                        if (dataSnapshot.exists()) {
+                            money = dataSnapshot.getValue(Integer.class);
+                            if(money < paymoney) {
+                                ErrorDialog errorDialog = new ErrorDialog(BuyPhoneCardActivity.this,
+                                        "Ví của bạn không đủ tiền, xin vui lòng nạp thêm");
+                                errorDialog.show();
+                            }
+                            else {
+                                money -= paymoney;
+                            }
+
+                        }
+                        userRef.child(Constant.MONEY).setValue(money);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Toast.makeText(BuyPhoneCardActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    public void upToHistory() {
+        DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
+        String date = df.format(Calendar.getInstance().getTime());
+        timecreated = String.valueOf(Calendar.getInstance().getTimeInMillis());
+        History newHistory = new History();
+        newHistory.setTypeOrder(Constant.TYPE_BUY_CARD_PHONE);
+        newHistory.setPrice(spinner.getSelectedItemPosition());
+        newHistory.setDateCreated(timecreated);
+        newHistory.setDateFormat(date);
+
+        FirebaseDatabase.getInstance().getReference(Constant.CUSTOMER)
+                .child(user.getMobile())
+                .child(Constant.HISTORY)
+                .child(newHistory.getDateCreated())
+                .setValue(newHistory);
+    }
+    public void upToOrder() {
+        DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
+        String date = df.format(Calendar.getInstance().getTime());
+        OrderCard orderDeposit = new OrderCard();
+        orderDeposit.setPrice(spinner.getSelectedItemPosition());
+        orderDeposit.setIssuingHousCard(listPhoneCard.get(curPos).getBankName());
+        orderDeposit.setSeriCard("517048427861481");
+        orderDeposit.setCodeCard("10005930442464");
+        orderDeposit.setDateCreate(timecreated);
+        orderDeposit.setDateFormat(date);
+
+        FirebaseDatabase.getInstance().getReference(Constant.CUSTOMER)
+                .child(user.getMobile())
+                .child(Constant.ORDER)
+                .child(Constant.ORDER_CARD_PHONE)
+                .child(orderDeposit.getDateCreate())
+                .setValue(orderDeposit)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        loadingDialog.dismiss();
+                        SuccessDialog dialog = new SuccessDialog(BuyPhoneCardActivity.this, "Nạp tiền thành công");
+                        dialog.show();
+                    }
+                });
+    }
+
+    public boolean checkPassword() {
+        String mk2 = editMk2.getText().toString();
+        if(mk2.isEmpty()){
+            Toast.makeText(BuyPhoneCardActivity.this,"Vui lòng xác nhận mua bằng mật khẩu",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(!mk2.equals(user.getPassword())) {
+            Toast.makeText(BuyPhoneCardActivity.this,"Mật khẩu không chính xác",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+         return true;
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.back_btn:
                 finish();
                 break;
-            case R.id.button_minus:
-                if (amount > 1) {
-                    amount--;
-                    textAmount.setText(amount + "");
-                }
-                break;
-            case R.id.button_plus:
-                if (amount < 99) {
-                    amount++;
-                    textAmount.setText(amount + "");
-                }
-                break;
+//            case R.id.button_minus:
+//                if (amount > 1) {
+//                    amount--;
+//                    textAmount.setText(amount + "");
+//                }
+//                break;
+//            case R.id.button_plus:
+//                if (amount < 99) {
+//                    amount++;
+//                    textAmount.setText(amount + "");
+//                }
+//                break;
             case R.id.continue_button:
-                if (sharedPreferences.getBoolean(Constant.IS_LOGIN, false)) {
+                if (sharedPreferences.getBoolean(Constant.IS_LOGIN, false) && checkPassword()) {
                     buyCard();
                 } else {
                     Toast.makeText(BuyPhoneCardActivity.this, "Bạn chưa đăng nhập, vui lòng đăng nhập để có thể sử dụng tính năng này", Toast.LENGTH_SHORT).show();

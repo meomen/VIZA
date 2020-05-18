@@ -30,9 +30,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-/**
- * Created by Linh Lee on 4/9/2017.
- */
+
 public class TransferFragment extends BaseFragment implements View.OnClickListener {
     private MyApplication app;
     private Gson mGson;

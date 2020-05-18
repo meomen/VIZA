@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "817194901363",
+    "firebase_url": "https://viza-41f35.firebaseio.com",
+    "project_id": "viza-41f35",
+    "storage_bucket": "viza-41f35.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:817194901363:android:77a0412d7eecee47002f06",
+        "android_client_info": {
+          "package_name": "com.vuducminh.viza"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "817194901363-qj9dgi69olkvgjtctfraf9gm7r4fojl7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vuducminh.viza",
+            "certificate_hash": "12d9595f2a729c784c356a9dcb6482f0b36a7faf"
+          }
+        },
+        {
+          "client_id": "817194901363-e17guqa47inn92ti2mt5vqbdnrolcjo3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFi760r5jHAV3aFxj8gw38Vzh-MvUXgWo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "817194901363-e17guqa47inn92ti2mt5vqbdnrolcjo3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -25,9 +25,7 @@ import com.vuducminh.viza.utils.GridSpacingItemDecoration;
 
 import java.util.ArrayList;
 
-/**
- * Created by Linh Lee on 4/9/2017.
- */
+
 public class PaymentFragment extends BaseFragment {
     private RecyclerView listPaymentView;
     private ListFunctionAdapter adapter;

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/bg_main"
-    android:orientation="vertical">
+    android:background="@mipmap/bg_main">
 
     <ImageView
         android:id="@+id/back_btn"
@@ -13,69 +13,186 @@
         android:layout_marginTop="@dimen/dp20"
         android:src="@mipmap/ic_back_white" />
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp80"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="@dimen/dp40"
-        android:layout_marginRight="@dimen/dp40"
-        android:layout_marginTop="@dimen/dp10"
-        android:src="@mipmap/logo" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/dp10"
-        android:text="ĐĂNG KÝ"
-        android:textColor="@android:color/white"
-        android:textStyle="bold" />
-
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp50"
-        android:layout_marginRight="@dimen/dp50"
-        android:layout_marginTop="@dimen/dp40"
-        android:text="@string/dang_ky_1"
-        android:textColor="@android:color/white" />
+        android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp50"
-        android:layout_marginRight="@dimen/dp50"
-        android:layout_marginTop="@dimen/dp10">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp80"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/dp40"
+            android:layout_marginTop="@dimen/dp60"
+            android:layout_marginRight="@dimen/dp40"
+            android:src="@mipmap/logo" />
 
         <TextView
-            android:id="@+id/text_dk1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="@string/cu_phap_1"
+            android:layout_gravity="center_horizontal"
+            android:text="ĐĂNG KÝ TÀI KHOẢN"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/sp20" />
+            android:textStyle="bold" />
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edit_repass"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/dp20"
+            android:layout_marginLeft="@dimen/dp50"
+            android:layout_marginRight="@dimen/dp50"
+            android:paddingTop="15dp">
+
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/ccp"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                app:ccp_countryPreference="VN,US"
+                app:ccp_defaultLanguage="VIETNAMESE"
+                app:ccp_defaultPhoneCode="84"
+                app:ccp_contentColor="@android:color/white"/>
+
+            <EditText
+                android:id="@+id/editPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:digits="0123456789"
+                android:backgroundTint="@android:color/white"
+                android:hint="Số điện thoại"
+                android:maxLength="13"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textSize="@dimen/sp18"/>
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/edit_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp50"
+            android:layout_marginTop="@dimen/dp20"
+            android:layout_marginRight="@dimen/dp50"
+            android:backgroundTint="@android:color/white"
+            android:hint="Tên tài khoản"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            android:textSize="@dimen/sp18" />
+
+        <EditText
+            android:id="@+id/edit_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp50"
+            android:layout_marginTop="@dimen/dp20"
+            android:layout_marginRight="@dimen/dp50"
+            android:backgroundTint="@android:color/white"
+            android:hint="Mật khẩu"
+            android:inputType="textPassword"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            android:textSize="@dimen/sp18" />
+
+        <EditText
+            android:id="@+id/edit_repass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp50"
+            android:layout_marginTop="@dimen/dp20"
+            android:layout_marginRight="@dimen/dp50"
+            android:layout_marginBottom="@dimen/dp30"
+            android:backgroundTint="@android:color/white"
+            android:hint="Xác nhận lại Mật khẩu"
+            android:inputType="textPassword"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            android:textSize="@dimen/sp18" />
+
 
         <Button
-            android:id="@+id/button_send"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp32"
-            android:layout_alignParentRight="true"
+            android:id="@+id/button_register"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:layout_marginLeft="@dimen/dp50"
+            android:layout_marginTop="@dimen/dp20"
+            android:layout_marginRight="@dimen/dp50"
             android:background="@drawable/button_style_1"
-            android:text="Soạn tin"
+            android:text="Đăng ký"
             android:textAllCaps="false"
-            android:textColor="@color/colorPrimary" />
+            android:textSize="@dimen/sp18" />
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp50"
+            android:layout_marginTop="@dimen/dp20"
+            android:layout_marginRight="@dimen/dp50">
 
-    <TextView
-        android:id="@+id/text_dk2"
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp50"
-        android:layout_marginRight="@dimen/dp50"
-        android:layout_marginTop="@dimen/dp10"
-        android:text="@string/dang_ky_2"
-        android:textColor="@android:color/white"/>
+        android:layout_height="@dimen/dp80"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="horizontal">
 
-</LinearLayout>
+        <ImageView
+            android:id="@+id/button_fanpage"
+            android:layout_width="@dimen/dp120"
+            android:layout_height="@dimen/dp60"
+            android:src="@mipmap/ic_fanpage" />
+
+        <LinearLayout
+            android:id="@+id/button_call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp40"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/dp16"
+                android:layout_height="@dimen/dp16"
+                android:src="@mipmap/ic_call" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp5"
+                android:text=":"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp5"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0949.762.975"
+                    android:textColor="@android:color/white" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0333.319.978"
+                    android:textColor="@android:color/white"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

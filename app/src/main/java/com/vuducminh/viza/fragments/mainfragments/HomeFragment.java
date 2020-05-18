@@ -41,9 +41,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-/**
- * Created by Linh Lee on 4/9/2017.
- */
+
 public class HomeFragment extends BaseFragment implements View.OnClickListener {
     private Gson mGson;
     private Retrofit mRetrofit;

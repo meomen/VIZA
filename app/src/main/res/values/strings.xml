@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Thecaosieure</string>
+    <string name="app_name">VIZA</string>
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>
     <string name="home_page">Trang chủ</string>
@@ -14,6 +14,7 @@
     <string name="mua_the_game">Mua thẻ game</string>
     <string name="nap_tien">Nạp tiền</string>
     <string name="nap_tien_card">Thẻ cào điện thoại, Thẻ gate</string>
+    <string name="connect_bank">Kết nối tài khoản ngân hàng</string>
     <string name="rut_tien">Rút tiền</string>
     <string name="rut_tien_atm">Rút về thẻ ATM</string>
     <string name="rut_tien_cmt">Rút về chứng minh thư</string>

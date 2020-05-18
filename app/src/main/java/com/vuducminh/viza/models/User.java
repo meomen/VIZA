@@ -1,6 +1,12 @@
 package com.vuducminh.viza.models;
 
-public class User {
+import androidx.annotation.NonNull;
+
+import com.google.gson.Gson;
+
+import java.io.Serializable;
+
+public class User implements Serializable {
     private String address;
     private int type;
     private String company;
@@ -10,6 +16,7 @@ public class User {
     private String mobile;
     private String fullname;
     private String username;
+    private String password;
     private String receive_otp;
     private String identityNumber;
     private String addressCompany;
@@ -18,14 +25,16 @@ public class User {
     private String provice;
     private String city;
     private String token = "";
-    private int gioitinh;
+
     private int userID;
     private String dateBirth;
 
+
     public User(String address, int type, String company, String email, int balance, int isActive,
-                String mobile, String fullname, String username, String receive_otp, String identityNumber,
-                String addressCompany, String megavnnUsername, String sex, String provice, String city, String token,
-                int gioitinh, int userID, String dateBirth) {
+                String mobile, String fullname, String username, String password,
+                String receive_otp, String identityNumber, String addressCompany,
+                String megavnnUsername, String sex, String provice, String city, String token,
+                int userID, String dateBirth) {
         this.address = address;
         this.type = type;
         this.company = company;
@@ -35,6 +44,7 @@ public class User {
         this.mobile = mobile;
         this.fullname = fullname;
         this.username = username;
+        this.password = password;
         this.receive_otp = receive_otp;
         this.identityNumber = identityNumber;
         this.addressCompany = addressCompany;
@@ -43,9 +53,11 @@ public class User {
         this.provice = provice;
         this.city = city;
         this.token = token;
-        this.gioitinh = gioitinh;
         this.userID = userID;
         this.dateBirth = dateBirth;
+    }
+
+    public User() {
     }
 
     public String getAddress() {
@@ -120,6 +132,14 @@ public class User {
         this.username = username;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getReceive_otp() {
         return receive_otp;
     }
@@ -184,13 +204,6 @@ public class User {
         this.token = token;
     }
 
-    public int getGioitinh() {
-        return gioitinh;
-    }
-
-    public void setGioitinh(int gioitinh) {
-        this.gioitinh = gioitinh;
-    }
 
     public int getUserID() {
         return userID;
@@ -206,5 +219,13 @@ public class User {
 
     public void setDateBirth(String dateBirth) {
         this.dateBirth = dateBirth;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        Gson gson = new Gson();
+        String json = gson.toJson(this);
+        return json;
     }
 }

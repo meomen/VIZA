@@ -9,11 +9,8 @@ import com.vuducminh.viza.R;
 import com.vuducminh.viza.utils.Constant;
 
 
-/**
- * Created by Admin on 10/31/2017.
- */
-
 public class CardInfoActivity extends BaseActivity implements View.OnClickListener {
+
     private ImageView backButton;
     private TextView textContent;
 

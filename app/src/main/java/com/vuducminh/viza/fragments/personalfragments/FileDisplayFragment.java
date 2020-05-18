@@ -86,7 +86,7 @@ public class FileDisplayFragment extends BaseFragment implements View.OnClickLis
             email.setText(user.getEmail());
             identityNumber.setText(user.getIdentityNumber());
             dateBirth.setText(user.getDateBirth());
-            if (user.getGioitinh() == 1) {
+            if (user.getSex().equals("MALE")) {
                 sex.setText("Nam");
             } else {
                 sex.setText("Nữ");
@@ -120,7 +120,7 @@ public class FileDisplayFragment extends BaseFragment implements View.OnClickLis
                     email.setText(myUser.getEmail());
                     identityNumber.setText(myUser.getIdentityNumber());
                     dateBirth.setText(myUser.getDateBirth());
-                    if (user.getGioitinh() == 1) {
+                    if (user.getSex().equals("MALE")) {
                         sex.setText("Nam");
                     } else {
                         sex.setText("Nữ");

@@ -49,7 +49,7 @@ public class ListCardAdapter extends RecyclerView.Adapter<ListCardAdapter.Recycl
         } else {
             ck = 100 - listCard.get(position).getDiscount();
         }
-        holder.textChietKhau.setText("Chiết khấu " + String.format("%.1f", ck) + "%");
+//        holder.textChietKhau.setText("Chiết khấu " + String.format("%.1f", ck) + "%");
 
         holder.itemView.setSelected(selectedPos == position);
 

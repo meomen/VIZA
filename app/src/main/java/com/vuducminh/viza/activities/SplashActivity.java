@@ -7,7 +7,6 @@ import com.vuducminh.viza.R;
 
 
 public class SplashActivity extends BaseActivity {
-
     @Override
     protected int getLayoutResource() {
         return R.layout.activity_splash;

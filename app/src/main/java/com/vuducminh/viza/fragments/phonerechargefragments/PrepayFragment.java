@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.vuducminh.viza.MyApplication;
 import com.vuducminh.viza.R;
@@ -24,13 +25,18 @@ import com.vuducminh.viza.dialogs.SuccessDialog;
 import com.vuducminh.viza.fragments.BaseFragment;
 import com.vuducminh.viza.models.CardObject;
 import com.vuducminh.viza.models.CardRequest;
+import com.vuducminh.viza.models.History;
 import com.vuducminh.viza.models.MoneyRequest;
 import com.vuducminh.viza.models.OtherRequest;
 import com.vuducminh.viza.models.User;
 import com.vuducminh.viza.retrofit.IRetrofitAPI;
 import com.vuducminh.viza.utils.Constant;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import retrofit2.Call;
@@ -61,6 +67,7 @@ public class PrepayFragment extends BaseFragment implements View.OnClickListener
 
     private int curPos = 0;
     private static int PICK_CONTACT = 1;
+    private String timecreated;
 
     private Call<CardRequest> getCardInfoAPI;
     private Call<OtherRequest> topupMobileAPI;
@@ -239,6 +246,64 @@ public class PrepayFragment extends BaseFragment implements View.OnClickListener
             }
         });
     }
+    public void upToHistory() {
+        DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
+        String date = df.format(Calendar.getInstance().getTime());
+        timecreated = String.valueOf(Calendar.getInstance().getTimeInMillis());
+        History newHistory = new History();
+        newHistory.setTypeOrder(4);
+        newHistory.setPrice(Integer.parseInt(listInfo.get(spinnerPrice.getSelectedItemPosition())));
+        newHistory.setDateCreated(timecreated);
+        newHistory.setDateFormat(date);
+
+        FirebaseDatabase.getInstance().getReference(Constant.CUSTOMER)
+                .child(user.getMobile())
+                .child(Constant.HISTORY)
+                .child(newHistory.getDateCreated())
+                .setValue(newHistory);
+    }
+//    private void topupMobile() {
+//        HashMap<String, Object> body = new HashMap<>();
+//        body.put("sodienthoai", editPhone.getText().toString());
+//        body.put("menhgia", listInfo.get(spinnerPrice.getSelectedItemPosition()));
+//        body.put("mk2", editMk2.getText().toString());
+//
+//        loadingDialog.show();
+//        topupMobileAPI = mRetrofitAPI.topupMobile(user.getToken(), body);
+//        topupMobileAPI.enqueue(new Callback<OtherRequest>() {
+//            @Override
+//            public void onResponse(Call<OtherRequest> call, Response<OtherRequest> response) {
+//                int errorCode = response.body().getErrorCode();
+//                String msg = response.body().getMsg();
+//                loadingDialog.dismiss();
+//
+//                if (errorCode == 1) {
+//                    SuccessDialog dialog = new SuccessDialog(getActivity(), msg);
+//                    dialog.show();
+//                } else {
+//                    Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+//
+//                    if (errorCode == -2) {
+//                        sharedPreferences.edit().putBoolean(Constant.IS_LOGIN, false).apply();
+//                        sharedPreferences.edit().putString(Constant.USER_INFO, "").apply();
+//                        Constant.restartApp(getActivity());
+//                    }
+//                }
+//
+//                editPhone.setText("");
+//                editMk2.setText("");
+//
+//                Intent i = new Intent(Constant.UPDATE_INFO);
+//                getActivity().sendBroadcast(i);
+//            }
+//
+//            @Override
+//            public void onFailure(Call<OtherRequest> call, Throwable t) {
+//                Toast.makeText(getActivity(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+//                loadingDialog.dismiss();
+//            }
+//        });
+//    }
 
     private void getThanhToan(int spinnerPos) {
         HashMap<String, Object> body = new HashMap<>();

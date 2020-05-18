@@ -9,6 +9,21 @@ public class CardObject {
     private String bankName;
     private String image;
 
+    public CardObject(String info, float disDPT, int active, float discount, String bankName, String image) {
+        this.info = info;
+        this.disDPT = disDPT;
+        this.active = active;
+        this.discount = discount;
+        this.bankName = bankName;
+        this.image = image;
+    }
+
+    public CardObject(String info, String bankName, String image) {
+        this.info = info;
+        this.bankName = bankName;
+        this.image = image;
+    }
+
     public String getInfo() {
         return info;
     }

@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 
 public class PhoneRechargeActivity extends BaseActivity implements View.OnClickListener {
+
     private ImageView backButton;
     private TabLayout tabs;
     private ViewPager pager;

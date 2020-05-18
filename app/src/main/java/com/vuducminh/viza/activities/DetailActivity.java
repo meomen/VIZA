@@ -25,79 +25,98 @@ import retrofit2.Retrofit;
 
 
 public class DetailActivity extends BaseActivity implements View.OnClickListener {
-    private Gson mGson;
-    private Retrofit mRetrofit;
-    private IRetrofitAPI mRetrofitAPI;
+    @Override
+    public void onClick(View v) {
 
-    private ImageView backButton;
-    private TextView titleText;
-    private TextView contentText;
-    private String title;
-    private String url;
-
-    private Call<PageRequest> getContentAPI;
+    }
 
     @Override
     protected int getLayoutResource() {
-        return R.layout.activity_detail;
+        return 0;
     }
 
     @Override
     protected void initVariables(Bundle savedInstanceState) {
-        mGson = MyApplication.getGson();
-        mRetrofit = MyApplication.getRetrofit();
-        mRetrofitAPI = mRetrofit.create(IRetrofitAPI.class);
 
-        backButton = (ImageView) findViewById(R.id.back_btn);
-        titleText = (TextView) findViewById(R.id.title_text);
-        contentText = (TextView) findViewById(R.id.content_text);
     }
 
     @Override
     protected void initData(Bundle savedInstanceState) {
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            title = extras.getString("title");
-            url = extras.getString("url");
-        }
 
-        titleText.setText(title);
-        if (url != null) {
-            getContent();
-        }
-
-        Constant.increaseHitArea(backButton);
-        backButton.setOnClickListener(this);
     }
-
-    private void getContent() {
-        HashMap<String, Object> body = new HashMap<>();
-        body.put("pagename", url.substring(url.lastIndexOf("=") + 1));
-
-        getContentAPI = mRetrofitAPI.getContentByName(body);
-        getContentAPI.enqueue(new Callback<PageRequest>() {
-            @Override
-            public void onResponse(Call<PageRequest> call, Response<PageRequest> response) {
-                int errorCode = response.body().getErrorCode();
-                String msg = response.body().getMsg();
-
-                if (errorCode == 1) {
-                    Spanned sp = Html.fromHtml(response.body().getData().getFulldescription());
-                    contentText.setText(sp);
-                } else {
-                    Toast.makeText(DetailActivity.this, msg, Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<PageRequest> call, Throwable t) {
-                Toast.makeText(DetailActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    @Override
-    public void onClick(View v) {
-        finish();
-    }
+//    private Gson mGson;
+//    private Retrofit mRetrofit;
+//    private IRetrofitAPI mRetrofitAPI;
+//
+//    private ImageView backButton;
+//    private TextView titleText;
+//    private TextView contentText;
+//    private String title;
+//    private String url;
+//
+//    private Call<PageRequest> getContentAPI;
+//
+//    @Override
+//    protected int getLayoutResource() {
+//        return R.layout.activity_detail;
+//    }
+//
+//    @Override
+//    protected void initVariables(Bundle savedInstanceState) {
+//        mGson = MyApplication.getGson();
+//        mRetrofit = MyApplication.getRetrofit();
+//        mRetrofitAPI = mRetrofit.create(IRetrofitAPI.class);
+//
+//        backButton = (ImageView) findViewById(R.id.back_btn);
+//        titleText = (TextView) findViewById(R.id.title_text);
+//        contentText = (TextView) findViewById(R.id.content_text);
+//    }
+//
+//    @Override
+//    protected void initData(Bundle savedInstanceState) {
+//        Bundle extras = getIntent().getExtras();
+//        if (extras != null) {
+//            title = extras.getString("title");
+//            url = extras.getString("url");
+//        }
+//
+//        titleText.setText(title);
+//        if (url != null) {
+//            getContent();
+//        }
+//
+//        Constant.increaseHitArea(backButton);
+//        backButton.setOnClickListener(this);
+//    }
+//
+//    private void getContent() {
+//        HashMap<String, Object> body = new HashMap<>();
+//        body.put("pagename", url.substring(url.lastIndexOf("=") + 1));
+//
+//        getContentAPI = mRetrofitAPI.getContentByName(body);
+//        getContentAPI.enqueue(new Callback<PageRequest>() {
+//            @Override
+//            public void onResponse(Call<PageRequest> call, Response<PageRequest> response) {
+//                int errorCode = response.body().getErrorCode();
+//                String msg = response.body().getMsg();
+//
+//                if (errorCode == 1) {
+//                    Spanned sp = Html.fromHtml(response.body().getData().getFulldescription());
+//                    contentText.setText(sp);
+//                } else {
+//                    Toast.makeText(DetailActivity.this, msg, Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<PageRequest> call, Throwable t) {
+//                Toast.makeText(DetailActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
+//
+//    @Override
+//    public void onClick(View v) {
+//        finish();
+//    }
 }

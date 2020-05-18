@@ -10,9 +10,17 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.vuducminh.viza.MyApplication;
 import com.vuducminh.viza.R;
@@ -21,14 +29,19 @@ import com.vuducminh.viza.dialogs.LoadingDialog;
 import com.vuducminh.viza.dialogs.SuccessDialog;
 import com.vuducminh.viza.models.CardObject;
 import com.vuducminh.viza.models.CardRequest;
+import com.vuducminh.viza.models.History;
 import com.vuducminh.viza.models.OtherRequest;
 import com.vuducminh.viza.models.User;
+import com.vuducminh.viza.models.order.OrderDeposit;
 import com.vuducminh.viza.retrofit.IRetrofitAPI;
 import com.vuducminh.viza.utils.Constant;
 import com.vuducminh.viza.utils.GridSpacingItemDecoration;
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import retrofit2.Call;
@@ -37,8 +50,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 
-
 public class DepositCardActivity extends BaseActivity implements View.OnClickListener {
+
     private MyApplication app;
     private Gson mGson;
     private Retrofit mRetrofit;
@@ -58,7 +71,7 @@ public class DepositCardActivity extends BaseActivity implements View.OnClickLis
     private LoadingDialog loadingDialog;
 
     private Call<CardRequest> getCardDPTAPI;
-    private Call<OtherRequest> cardChargeAPI;
+    private String timecreated;
 
     @Override
     protected int getLayoutResource() {
@@ -136,67 +149,102 @@ public class DepositCardActivity extends BaseActivity implements View.OnClickLis
         });
     }
 
-    private void cardCharge() {
-        String token = "";
-        if (user != null) {
-            token = user.getToken();
-        }
+    public void upToOrder() {
+        DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
+        String date = df.format(Calendar.getInstance().getTime());
+        OrderDeposit orderDeposit = new OrderDeposit();
+        orderDeposit.setPrice(100000);
+        orderDeposit.setIssuingHousCard(listCard.get(curPos).getBankName());
+        orderDeposit.setSeriCard(editSerie.getText().toString());
+        orderDeposit.setCodeCard(editMaThe.getText().toString());
+        orderDeposit.setDateCreate(String.valueOf(Calendar.getInstance().getTimeInMillis()));
+        orderDeposit.setDateFormat(date);
 
-        HashMap<String, Object> body = new HashMap<>();
-        body.put("loaithe", listCard.get(curPos).getBankName());
-        body.put("serial", editSerie.getText().toString());
-        body.put("mathe", editMaThe.getText().toString());
-
-        loadingDialog.show();
-        cardChargeAPI = mRetrofitAPI.cardCharge(token, body);
-        cardChargeAPI.enqueue(new Callback<OtherRequest>() {
-            @Override
-            public void onResponse(Call<OtherRequest> call, Response<OtherRequest> response) {
-                int errorCode = response.body().getErrorCode();
-                String msg = response.body().getMsg();
-                loadingDialog.dismiss();
-
-                if (errorCode == 1) {
-                    SuccessDialog dialog = new SuccessDialog(DepositCardActivity.this, msg);
-                    dialog.show();
-                } else {
-                    Toast.makeText(DepositCardActivity.this, msg, Toast.LENGTH_SHORT).show();
-
-                    if (errorCode == -2) {
-                        sharedPreferences.edit().putBoolean(Constant.IS_LOGIN, false).apply();
-                        sharedPreferences.edit().putString(Constant.USER_INFO, "").apply();
-                        Constant.restartApp(DepositCardActivity.this);
+        FirebaseDatabase.getInstance().getReference(Constant.CUSTOMER)
+                .child(user.getMobile())
+                .child(Constant.ORDER)
+                .child(Constant.ORDER_DEPOSIT)
+                .child(orderDeposit.getDateCreate())
+                .setValue(orderDeposit)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        SuccessDialog dialog = new SuccessDialog(DepositCardActivity.this, "Nạp tiền thành công");
+                        dialog.show();
+                        addMoney();
+                        editSerie.setText("");
+                        editMaThe.setText("");
                     }
-                }
+                });
+    }
 
-                editSerie.setText("");
-                editMaThe.setText("");
+    public void upToHistory() {
+        DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
+        String date = df.format(Calendar.getInstance().getTime());
+        timecreated = String.valueOf(Calendar.getInstance().getTimeInMillis());
+        History newHistory = new History();
+        newHistory.setTypeOrder(Constant.TYPE_DEPOSTI);
+        newHistory.setPrice(10000);
+        newHistory.setDateCreated(timecreated);
+        newHistory.setDateFormat(date);
 
-                Intent i = new Intent(Constant.UPDATE_INFO);
-                sendBroadcast(i);
-            }
+        FirebaseDatabase.getInstance().getReference(Constant.CUSTOMER)
+                .child(user.getMobile())
+                .child(Constant.HISTORY)
+                .child(newHistory.getDateCreated())
+                .setValue(newHistory);
+    }
 
-            @Override
-            public void onFailure(Call<OtherRequest> call, Throwable t) {
-                Toast.makeText(DepositCardActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                loadingDialog.dismiss();
-            }
-        });
+    public void addMoney() {
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference(Constant.CUSTOMER)
+                .child(user.getMobile()).child(Constant.WALLET);
+        userRef.child(Constant.MONEY)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Integer money = 0;
+                        if (dataSnapshot.exists()) {
+                            money = dataSnapshot.getValue(Integer.class);
+                            money += 100000;
+
+                        }
+                        userRef.child(Constant.MONEY).setValue(money);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Toast.makeText(DepositCardActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    public boolean checkEditText() {
+        if(editMaThe.getText().toString().isEmpty()) {
+            Toast.makeText(DepositCardActivity.this,"Vui lòng nhập mã thẻ",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(editSerie.getText().toString().isEmpty()) {
+            Toast.makeText(DepositCardActivity.this,"Vui lòng nhập số seri",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.back_btn:
-                finish();
-                break;
-            case R.id.button_continue:
-                if (sharedPreferences.getBoolean(Constant.IS_LOGIN, false)) {
-                    cardCharge();
-                } else {
-                    Toast.makeText(DepositCardActivity.this, "Bạn chưa đăng nhập, vui lòng đăng nhập để có thể sử dụng tính năng này", Toast.LENGTH_SHORT).show();
-                }
-                break;
-        }
+            switch (v.getId()) {
+                case R.id.back_btn:
+                    finish();
+                    break;
+                case R.id.button_continue:
+                    if (sharedPreferences.getBoolean(Constant.IS_LOGIN, false) && checkEditText()) {
+                        upToHistory();
+                        upToOrder();
+
+                    } else {
+                        Toast.makeText(DepositCardActivity.this, "Bạn chưa đăng nhập, vui lòng đăng nhập để có thể sử dụng tính năng này", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+            }
     }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/bg_main">
@@ -26,18 +27,39 @@
             android:textColor="@android:color/white"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/edit_username"
+        <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_marginLeft="@dimen/dp50"
             android:layout_marginRight="@dimen/dp50"
-            android:layout_marginTop="@dimen/dp40"
-            android:backgroundTint="@android:color/white"
-            android:hint="Tên tài khoản"
-            android:textColor="@android:color/white"
-            android:textColorHint="@android:color/white"
-            android:textSize="@dimen/sp18" />
+            android:layout_marginTop="@dimen/dp30"
+            android:paddingTop="15dp">
+
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/ccp"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                app:ccp_countryPreference="VN,US"
+                app:ccp_defaultLanguage="VIETNAMESE"
+                app:ccp_defaultPhoneCode="84"
+                app:ccp_contentColor="@android:color/white"/>
+
+            <EditText
+                android:id="@+id/editPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:digits="0123456789"
+                android:backgroundTint="@android:color/white"
+                android:hint="Số điện thoại"
+                android:maxLength="13"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textSize="@dimen/sp18"/>
+
+        </LinearLayout>
 
         <EditText
             android:id="@+id/edit_pass"
@@ -144,15 +166,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0963.986.398"
+                    android:text="0949.762.975"
                     android:textColor="@android:color/white"/>
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0979.943.129"
+                    android:text="0333.319.978"
                     android:textColor="@android:color/white"/>
-
             </LinearLayout>
 
         </LinearLayout>
